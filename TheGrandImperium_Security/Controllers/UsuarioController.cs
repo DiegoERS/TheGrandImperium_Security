@@ -29,7 +29,14 @@ namespace TheGrandImperium_Security.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UsuarioDTO>> Login(UsuarioDTO usuario)
         {
-            return await _login.Ejecutar(usuario);
+            try
+            {
+                return await _login.Ejecutar(usuario);
+            }
+            catch 
+            {
+                return NoContent(); // Error lógico: usuario o clave incorrecta
+            }
         }
 
         [HttpPost("refrescarToken")]
